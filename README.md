@@ -133,7 +133,7 @@ ALTER TABLE produto_fornecedor AUTO_INCREMENT = 1;
 
 ## Analises
 
-###utilização do banco de dados
+### utilização do banco de dados
 
 '''sql
 use ecommerce;
