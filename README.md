@@ -130,6 +130,7 @@ CREATE TABLE produto_fornecedor(
 );
 ALTER TABLE produto_fornecedor AUTO_INCREMENT = 1;
 
+```markdown
 ## Modelo
 ![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/ModeloEcommerce.png)
 
