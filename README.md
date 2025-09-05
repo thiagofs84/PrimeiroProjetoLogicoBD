@@ -131,6 +131,23 @@ CREATE TABLE produto_fornecedor(
 ALTER TABLE produto_fornecedor AUTO_INCREMENT = 1;
 ```
 
-## Modelo
-![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/ModeloEcommerce.png)
+## Analises
+
+###utilização do banco de dados
+
+'''sql
+use ecommerce;
+'''
+
+###seleção simples dos nomes de cliente
+'''sql
+select
+PNome,
+NomeMeioInicial,
+Sobrenome
+from cliente;
+'''
+
+
+
 
