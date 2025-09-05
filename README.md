@@ -11,6 +11,7 @@ Construindo seu Primeiro Projeto Lógico de Banco de Dados
 CREATE DATABASE ecommerce;
 USE ecommerce;
 sql```
+
 -- criar tabela cliente
 CREATE TABLE cliente(
     idCliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
