@@ -149,6 +149,7 @@ Sobrenome
 from cliente;
 ```
 #### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/1-sele%C3%A7%C3%A3o%20simples%20dos%20nomes%20de%20cliente.png)
 
 ### nome completo e tipo de cliente
 ```sql
@@ -160,6 +161,7 @@ Pessoa
 from cliente;
 ```
 #### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/2-nome%20completo%20e%20tipo%20de%20cliente.png)
 
 ### Quantidade de pedidos por cliente
 ```sql
@@ -174,6 +176,7 @@ group by cliente.idCliente, PNome, NomeMeioInicial, Sobrenome
 order by concat(PNome," ",NomeMeioInicial," ",Sobrenome);
 ```
 #### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/3-Quantidade%20de%20pedidos%20por%20cliente.png)
 
 ### Relação Produto, fornecedor e estoque
 ```sql
@@ -197,14 +200,18 @@ join produto_fornecedor
 order by Localização, produto.NomeProduto, fornecedor.RazaoSocial;
 ```
 #### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/4-Rela%C3%A7%C3%A3o%20Produto-fornecedor-estoque.png)
 
 ### pedidos entregues
 ```sql
 select *
 from pedido
 where pedido.Situação = "Entregue";
+```
+#### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/5-pedidos%20entregues.png)
 
--- tempo de entrega por pedido
+### tempo de entrega por pedido
 ```sql
 select
 idPedido,
@@ -213,6 +220,7 @@ from pedido
 where pedido.Situação = "Entregue";
 ```
 #### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/6-tempo%20de%20entrega%20por%20pedido.png)
 
 ### média de tempo de entrega mensal
 ```sql
@@ -226,6 +234,7 @@ group by year(DataPedido), month(DataPedido)
 order by Ano, Mes;
 ```
 #### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/7-media%20de%20tempo%20de%20entrega%20mensal.png)
 
 ### pedidos em atraso
 ```sql
@@ -244,6 +253,7 @@ WHERE pedido.Situação <> 'Entregue'
 ORDER BY DiasEmAberto DESC;
 ```
 #### retorno:
+![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/8-pedidos%20em%20atraso.png)
 
 
 
