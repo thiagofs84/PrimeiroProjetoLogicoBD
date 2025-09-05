@@ -136,11 +136,11 @@ ALTER TABLE produto_fornecedor AUTO_INCREMENT = 1;
 ### utilização do banco de dados
 
 ```sql
--- criação do banco de dados para o cenário de E-commerce
 USE ecommerce;
 ```
 
-###seleção simples dos nomes de cliente
+### seleção simples dos nomes de cliente
+
 '''sql
 select
 PNome,
