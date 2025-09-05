@@ -10,7 +10,7 @@ Construindo seu Primeiro Projeto Lógico de Banco de Dados
 -- criação do banco de dados para o cenário de E-commerce
 CREATE DATABASE ecommerce;
 USE ecommerce;
-
+```sql
 -- criar tabela cliente
 CREATE TABLE cliente(
     idCliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
