@@ -141,13 +141,15 @@ USE ecommerce;
 
 ### seleção simples dos nomes de cliente
 
-'''sql
+```sql
 select
 PNome,
 NomeMeioInicial,
 Sobrenome
 from cliente;
-'''
+```
+
+
 
 
 
