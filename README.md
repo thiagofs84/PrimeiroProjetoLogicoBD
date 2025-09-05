@@ -148,6 +148,7 @@ NomeMeioInicial,
 Sobrenome
 from cliente;
 ```
+#### retorno:
 
 ### nome completo e tipo de cliente
 ```sql
@@ -158,6 +159,7 @@ concat(
 Pessoa
 from cliente;
 ```
+#### retorno:
 
 ### Quantidade de pedidos por cliente
 ```sql
@@ -171,6 +173,7 @@ inner join pedido
 group by cliente.idCliente, PNome, NomeMeioInicial, Sobrenome
 order by concat(PNome," ",NomeMeioInicial," ",Sobrenome);
 ```
+#### retorno:
 
 ### Relação Produto, fornecedor e estoque
 ```sql
@@ -193,6 +196,7 @@ join produto_fornecedor
 			on estoque.idEstoque = produto_estoque.Estoque_idEstoque
 order by Localização, produto.NomeProduto, fornecedor.RazaoSocial;
 ```
+#### retorno:
 
 ### pedidos entregues
 ```sql
@@ -208,6 +212,7 @@ DataEntrega - DataPedido
 from pedido
 where pedido.Situação = "Entregue";
 ```
+#### retorno:
 
 ### média de tempo de entrega mensal
 ```sql
@@ -220,6 +225,7 @@ where pedido.Situação = 'Entregue'
 group by year(DataPedido), month(DataPedido)
 order by Ano, Mes;
 ```
+#### retorno:
 
 ### pedidos em atraso
 ```sql
@@ -237,6 +243,7 @@ WHERE pedido.Situação <> 'Entregue'
   )
 ORDER BY DiasEmAberto DESC;
 ```
+#### retorno:
 
 
 
