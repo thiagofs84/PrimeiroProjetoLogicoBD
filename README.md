@@ -5,10 +5,10 @@ Construindo seu Primeiro Projeto Lógico de Banco de Dados
 ![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/ModeloEcommerce.png)
 
 ## Scripts para criação do BD e tabelas
--- criação do banco de dados para o cenário de E-commerce
+### criação do banco de dados para o cenário de E-commerce
 
-###create database ecommerce;
-####use ecommerce;
+create database ecommerce;
+use ecommerce;
 
 -- criar tabela cliente
 create table cliente(
