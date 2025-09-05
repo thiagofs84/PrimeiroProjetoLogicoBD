@@ -9,7 +9,7 @@ Construindo seu Primeiro Projeto Lógico de Banco de Dados
 ```sql
 -- criação do banco de dados para o cenário de E-commerce
 CREATE DATABASE ecommerce;
-USE ecommerce;
+USE ecommerce;```
 
 -- criar tabela cliente
 CREATE TABLE cliente(
