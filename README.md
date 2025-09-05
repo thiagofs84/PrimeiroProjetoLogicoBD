@@ -7,8 +7,8 @@ Construindo seu Primeiro Projeto Lógico de Banco de Dados
 ## Scripts para criação do BD e tabelas
 -- criação do banco de dados para o cenário de E-commerce
 
-create database ecommerce;
-use ecommerce;
+####create database ecommerce;
+#####use ecommerce;
 
 -- criar tabela cliente
 create table cliente(
