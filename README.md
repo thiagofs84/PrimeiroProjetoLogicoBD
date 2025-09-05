@@ -5,131 +5,127 @@ Construindo seu Primeiro Projeto Lógico de Banco de Dados
 ![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/ModeloEcommerce.png)
 
 ## Scripts para criação do BD e tabelas
-### criação do banco de dados para o cenário de E-commerce
 
-create database ecommerce;
-use ecommerce;
+```sql
+-- criação do banco de dados para o cenário de E-commerce
+CREATE DATABASE ecommerce;
+USE ecommerce;
 
 -- criar tabela cliente
-create table cliente(
-idCliente int not null auto_increment primary key,
-PNome varchar(15),
-NomeMeioInicial varchar(3),
-Sobrenome varchar (25),
-CPF char(11) not null,
-Endereço varchar(45),
-DataNascto date,
-Pessoa enum('Fisica', 'Juridica') not null default 'Fisica',
-constraint unique_cpf_cliente unique (CPF)
+CREATE TABLE cliente(
+    idCliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    PNome VARCHAR(15),
+    NomeMeioInicial VARCHAR(3),
+    Sobrenome VARCHAR(25),
+    CPF CHAR(11) NOT NULL,
+    Endereço VARCHAR(45),
+    DataNascto DATE,
+    Pessoa ENUM('Fisica', 'Juridica') NOT NULL DEFAULT 'Fisica',
+    CONSTRAINT unique_cpf_cliente UNIQUE (CPF)
 );
-alter table cliente auto_increment = 1;
+ALTER TABLE cliente AUTO_INCREMENT = 1;
 
 -- criar tabela produto
-create table produto(
-idProduto int not null auto_increment primary key,
-NomeProduto varchar(15) not null,
-Vendedor varchar(45),
-Categoria enum('Eletronico', 'Vestimenta', 'Brinquedos', 'Cosméticos') not null,
-Descrição varchar (45) not null,
-Valor float not null,
-Dimensão float
+CREATE TABLE produto(
+    idProduto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NomeProduto VARCHAR(15) NOT NULL,
+    Vendedor VARCHAR(45),
+    Categoria ENUM('Eletronico', 'Vestimenta', 'Brinquedos', 'Cosméticos') NOT NULL,
+    Descrição VARCHAR(45) NOT NULL,
+    Valor FLOAT NOT NULL,
+    Dimensão FLOAT
 );
-alter table produto auto_increment = 1;
+ALTER TABLE produto AUTO_INCREMENT = 1;
 
 -- criar tabela pedido
-create table pedido(
-idPedido int not null auto_increment primary key,
-cliente_idCliente int,
-ValorFrete float,
-DataPedido date,
-DataEntrega date,
-Situação enum('Em andamento', 'Processando', 'Enviado', 'Entregue') default('Processando') not null,
-Descrição varchar(45),
-Rastreamento varchar(255),
-forma_pagamento enum('cartão de crédito', 'pix', 'boleto') default('cartão de crédito') not null,
-constraint fk_pedidos_cliente foreign key (Cliente_idCliente) references cliente(idCliente)
+CREATE TABLE pedido(
+    idPedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cliente_idCliente INT,
+    ValorFrete FLOAT,
+    DataPedido DATE,
+    DataEntrega DATE,
+    Situação ENUM('Em andamento', 'Processando', 'Enviado', 'Entregue') NOT NULL DEFAULT 'Processando',
+    Descrição VARCHAR(45),
+    Rastreamento VARCHAR(255),
+    forma_pagamento ENUM('cartão de crédito', 'pix', 'boleto') NOT NULL DEFAULT 'cartão de crédito',
+    CONSTRAINT fk_pedidos_cliente FOREIGN KEY (cliente_idCliente) REFERENCES cliente(idCliente)
 );
-alter table pedido auto_increment = 1;
+ALTER TABLE pedido AUTO_INCREMENT = 1;
+
 -- criar tabela estoque
-
-create table estoque(
-idEstoque int primary key not null auto_increment,
-localizacao varchar(255),
-quantidade float default 0
+CREATE TABLE estoque(
+    idEstoque INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    localizacao VARCHAR(255),
+    quantidade FLOAT DEFAULT 0
 );
+ALTER TABLE estoque AUTO_INCREMENT = 1;
+
 -- criar tabela fornecedor
-alter table estoque auto_increment = 1;
-
-create table fornecedor(
-idFornecedor int primary key not null,
-RazaoSocial varchar(50) not null,
-CNPJ varchar(14) not null,
-contato varchar(12) not null,
-constraint unico_fornecedor unique (CNPJ)
+CREATE TABLE fornecedor(
+    idFornecedor INT PRIMARY KEY NOT NULL,
+    RazaoSocial VARCHAR(50) NOT NULL,
+    CNPJ VARCHAR(14) NOT NULL,
+    contato VARCHAR(12) NOT NULL,
+    CONSTRAINT unico_fornecedor UNIQUE (CNPJ)
 );
-alter table fornecedor auto_increment = 1;
+ALTER TABLE fornecedor AUTO_INCREMENT = 1;
 
--- criar a tabela parceiro
-
-create table parceiro(
-idParceiro int primary key not null auto_increment,
-RazaoSocial varchar(45) not null unique,
-CNPJ varchar(14),
-CPF varchar(9),
-contato varchar(12) not null,
-endereco varchar(255),
-NomeFantasia varchar(45) not null,
-constraint unico_parceiro_cnpj unique (CNPJ),
-constraint unico_parceiro_cpf unique (CPF)
+-- criar tabela parceiro
+CREATE TABLE parceiro(
+    idParceiro INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    RazaoSocial VARCHAR(45) NOT NULL UNIQUE,
+    CNPJ VARCHAR(14),
+    CPF VARCHAR(9),
+    contato VARCHAR(12) NOT NULL,
+    endereco VARCHAR(255),
+    NomeFantasia VARCHAR(45) NOT NULL,
+    CONSTRAINT unico_parceiro_cnpj UNIQUE (CNPJ),
+    CONSTRAINT unico_parceiro_cpf UNIQUE (CPF)
 );
-alter table parceiro auto_increment = 1;
+ALTER TABLE parceiro AUTO_INCREMENT = 1;
 
--- criar a tabela Produto_Parceiro
-
-create table produto_parceiro(
-Parceiro_idParceiro int,
-Produto_idProduto int,
-Quantidade int default 1,
-primary key (Parceiro_idParceiro, Produto_idProduto),
-constraint fk_parceiro foreign key (Parceiro_idParceiro) references parceiro(idParceiro),
-constraint fk_produto_parceiro foreign key (Produto_idProduto) references produto(idProduto)
+-- criar tabela produto_parceiro
+CREATE TABLE produto_parceiro(
+    Parceiro_idParceiro INT,
+    Produto_idProduto INT,
+    Quantidade INT DEFAULT 1,
+    PRIMARY KEY (Parceiro_idParceiro, Produto_idProduto),
+    CONSTRAINT fk_parceiro FOREIGN KEY (Parceiro_idParceiro) REFERENCES parceiro(idParceiro),
+    CONSTRAINT fk_produto_parceiro FOREIGN KEY (Produto_idProduto) REFERENCES produto(idProduto)
 );
-alter table produto_parceiro auto_increment = 1;
+ALTER TABLE produto_parceiro AUTO_INCREMENT = 1;
 
--- criar a tabela Produto_Pedido
-
-create table produto_pedido(
-Pedido_idPedido int,
-Produto_idProduto int,
-Quantidade int default 1,
-Status enum('Disponivel', 'Sem estoque') default'Disponivel',
-primary key (Pedido_idPedido, Produto_idProduto),
-constraint fk_pedido foreign key (Pedido_idPedido) references pedido(idPedido),
-constraint fk_produto_pedido foreign key (Produto_idProduto) references produto(idProduto)
+-- criar tabela produto_pedido
+CREATE TABLE produto_pedido(
+    Pedido_idPedido INT,
+    Produto_idProduto INT,
+    Quantidade INT DEFAULT 1,
+    Status ENUM('Disponivel', 'Sem estoque') DEFAULT 'Disponivel',
+    PRIMARY KEY (Pedido_idPedido, Produto_idProduto),
+    CONSTRAINT fk_pedido FOREIGN KEY (Pedido_idPedido) REFERENCES pedido(idPedido),
+    CONSTRAINT fk_produto_pedido FOREIGN KEY (Produto_idProduto) REFERENCES produto(idProduto)
 );
-alter table produto_pedido auto_increment = 1;
+ALTER TABLE produto_pedido AUTO_INCREMENT = 1;
 
--- criar a tabela Produto_Estoque
-
-create table produto_estoque(
-Estoque_idEstoque int,
-Produto_idProduto int,
-localizacao varchar(255) not null,
-quantidade float,
-primary key (Estoque_idEstoque, Produto_idProduto),
-constraint fk_estoque foreign key (Estoque_idEstoque) references estoque(idEstoque),
-constraint fk_produto_estoque foreign key (Produto_idProduto) references produto(idProduto)
+-- criar tabela produto_estoque
+CREATE TABLE produto_estoque(
+    Estoque_idEstoque INT,
+    Produto_idProduto INT,
+    localizacao VARCHAR(255) NOT NULL,
+    quantidade FLOAT,
+    PRIMARY KEY (Estoque_idEstoque, Produto_idProduto),
+    CONSTRAINT fk_estoque FOREIGN KEY (Estoque_idEstoque) REFERENCES estoque(idEstoque),
+    CONSTRAINT fk_produto_estoque FOREIGN KEY (Produto_idProduto) REFERENCES produto(idProduto)
 );
-alter table produto_estoque auto_increment = 1;
+ALTER TABLE produto_estoque AUTO_INCREMENT = 1;
 
--- criar a tabela Produto_Fornecedor
-
-create table produto_fornecedor(
-Fornecedor_idFornecedor int,
-Produto_idProduto int,
-RazaoSocial varchar(50),
-primary key (Fornecedor_idFornecedor, Produto_idProduto),
-constraint fk_fornecedor foreign key (Fornecedor_idFornecedor) references fornecedor(idFornecedor),
-constraint fk_produto_fornecedor foreign key (Produto_idProduto) references produto(idProduto)
+-- criar tabela produto_fornecedor
+CREATE TABLE produto_fornecedor(
+    Fornecedor_idFornecedor INT,
+    Produto_idProduto INT,
+    RazaoSocial VARCHAR(50),
+    PRIMARY KEY (Fornecedor_idFornecedor, Produto_idProduto),
+    CONSTRAINT fk_fornecedor FOREIGN KEY (Fornecedor_idFornecedor) REFERENCES fornecedor(idFornecedor),
+    CONSTRAINT fk_produto_fornecedor FOREIGN KEY (Produto_idProduto) REFERENCES produto(idProduto)
 );
-alter table produto_fornecedor auto_increment = 1;
+ALTER TABLE produto_fornecedor AUTO_INCREMENT = 1;
