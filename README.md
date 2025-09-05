@@ -10,7 +10,6 @@ Construindo seu Primeiro Projeto Lógico de Banco de Dados
 -- criação do banco de dados para o cenário de E-commerce
 CREATE DATABASE ecommerce;
 USE ecommerce;
-```
 
 -- criar tabela cliente
 CREATE TABLE cliente(
@@ -130,8 +129,8 @@ CREATE TABLE produto_fornecedor(
     CONSTRAINT fk_produto_fornecedor FOREIGN KEY (Produto_idProduto) REFERENCES produto(idProduto)
 );
 ALTER TABLE produto_fornecedor AUTO_INCREMENT = 1;
+```
 
-```markdown
 ## Modelo
 ![](https://github.com/thiagofs84/PrimeiroProjetoLogicoBD/blob/main/ModeloEcommerce.png)
 
