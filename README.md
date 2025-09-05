@@ -149,6 +149,96 @@ Sobrenome
 from cliente;
 ```
 
+### nome completo e tipo de cliente
+```sql
+select
+concat(
+	PNome, " ",	NomeMeioInicial, " ", Sobrenome
+) as "Nome Completo",
+Pessoa
+from cliente;
+```
+
+### Quantidade de pedidos por cliente
+```sql
+select
+    CONCAT(PNome, ' ', NomeMeioInicial, ' ', Sobrenome
+    ) as `Nome Completo`,
+    count(pedido.idPedido) as `Qtdd de Pedidos`
+from cliente
+inner join pedido 
+    on cliente.idCliente = pedido.cliente_idCliente
+group by cliente.idCliente, PNome, NomeMeioInicial, Sobrenome
+order by concat(PNome," ",NomeMeioInicial," ",Sobrenome);
+```
+
+### Relação Produto, fornecedor e estoque
+```sql
+select
+  produto.idProduto,
+  produto.NomeProduto,
+  fornecedor.idFornecedor,
+  fornecedor.RazaoSocial,
+  estoque.idEstoque,
+  coalesce(produto_estoque.localizacao, estoque.localizacao) as Localização,
+  produto_estoque.quantidade
+from produto
+join produto_fornecedor
+  on produto_fornecedor.Produto_idProduto = produto.idProduto
+	join fornecedor
+	on fornecedor.idFornecedor = produto_fornecedor.Fornecedor_idFornecedor
+		join produto_estoque
+		on produto_estoque.Produto_idProduto = produto.idProduto
+			join estoque
+			on estoque.idEstoque = produto_estoque.Estoque_idEstoque
+order by Localização, produto.NomeProduto, fornecedor.RazaoSocial;
+```
+
+### pedidos entregues
+```sql
+select *
+from pedido
+where pedido.Situação = "Entregue";
+
+-- tempo de entrega por pedido
+```sql
+select
+idPedido,
+DataEntrega - DataPedido
+from pedido
+where pedido.Situação = "Entregue";
+```
+
+### média de tempo de entrega mensal
+```sql
+select 
+    year(DataPedido) as Ano,
+    month(DataPedido) as Mes,
+    round(avg(datediff(DataEntrega, DataPedido)),1) as "Média Mensal de Tempo de Entrega"
+from pedido
+where pedido.Situação = 'Entregue'
+group by year(DataPedido), month(DataPedido)
+order by Ano, Mes;
+```
+
+### pedidos em atraso
+```sql
+ SELECT 
+    idPedido,
+    DataPedido,
+    DATEDIFF(CURDATE(), DataPedido) AS DiasEmAberto,
+    Situação
+FROM pedido
+WHERE pedido.Situação <> 'Entregue'
+  AND DATEDIFF(CURDATE(), DataPedido) > (
+      SELECT AVG(DATEDIFF(DataEntrega, DataPedido))
+      FROM pedido
+      WHERE pedido.Situação = 'Entregue'
+  )
+ORDER BY DiasEmAberto DESC;
+```
+
+
 
 
 
